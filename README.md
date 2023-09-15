@@ -35,4 +35,4 @@
 <h3 align="center">Name: Ronak Khandelwal<br>
 College: Arya College of Engineering, Kukas<br>
 Year: 1st Year<br>
-Course and Instructor: Python Summer Training by Learn and Buid (Randhir sir)</h3>
+Course and Instructor: Python Summer Training by Learn and Build (Randhir sir)</h3>
