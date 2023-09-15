@@ -26,10 +26,10 @@
  * Use of class
 
 ### Project
-- Weather GUI using OpenWeatherMap.org api
- [x] Use of canvas for pretty GUI
- [x] Use of API to get weather of any city/location (that is supported by openweathermap)
- [x] No need to re-launch the app every time to check the weather of another location.
+#### Weather GUI using OpenWeatherMap.org api
+- [x] Use of canvas for pretty GUI
+- [x] Use of API to get weather of any city/location (that is supported by openweathermap)
+- [x] No need to re-launch the app every time to check the weather of another location.
 
 # Project By:
 <h3 align="center">Name: Ronak Khandelwal<br>
