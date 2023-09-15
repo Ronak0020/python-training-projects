@@ -1,6 +1,10 @@
 from pathlib import Path
 from tkinter import Tk, Canvas, Entry, Button, PhotoImage
 import requests
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / "assets"
@@ -119,24 +123,46 @@ def weatherAnalyze():
     button_1.place_forget()
     canvas.itemconfig(tagOrId="textInput", state="hidden")
     text = entry_1.get()
-    print(text)
     details = getWeather(text)
-    weatherType = details["weather"][0]["main"]
-    temp = details["main"]["temp"]
-    feelstemp = details["main"]["feels_like"]
-    humidity = details["main"]["humidity"]
-    cityname = details["name"]
-    
-    canvas.create_text(
+    if isinstance(details, str) and details == "invalid_city":
+        canvas.create_text(
         450.0,
         130.0,
         anchor="nw",
         width=400,
-        text=f"Location: {cityname}\nWeather: {weatherType}\nCurrent Temperation | Feels Like: {temp} ° C | {feelstemp} ° C\nHumidity: {humidity}",
+        text=f"{text} Is not a valid city name! Please try again.",
         fill="#848484",
         tags="weather_details",
         font=("Tajawal Regular", 24 * -1),
     )
+    elif isinstance(details, str) and details == "invalid_api":
+        canvas.create_text(
+        450.0,
+        130.0,
+        anchor="nw",
+        width=400,
+        text="The provided api key is incorrect! Please check it.",
+        fill="#848484",
+        tags="weather_details",
+        font=("Tajawal Regular", 24 * -1),
+    )
+    else:
+        weatherType = details["weather"][0]["main"]
+        temp = details["main"]["temp"]
+        feelstemp = details["main"]["feels_like"]
+        humidity = details["main"]["humidity"]
+        cityname = details["name"]
+        
+        canvas.create_text(
+            450.0,
+            130.0,
+            anchor="nw",
+            width=400,
+            text=f"Location: {cityname}\nWeather: {weatherType}\nCurrent Temperation | Feels Like: {temp} ° C | {feelstemp} ° C\nHumidity: {humidity}",
+            fill="#848484",
+            tags="weather_details",
+            font=("Tajawal Regular", 24 * -1),
+        )
     button_1.place_forget()
     button_3.place(x=556.99, y=303.0, width=180.0, height=55.0)
     canvas.delete("entrybg")
@@ -152,13 +178,13 @@ def resetButtons():
 
 
 def getWeather(city):
-    apiKey = "edde23ce5194305478a320f7ed254f3a"
-    City = city
-    url = f"http://api.openweathermap.org/data/2.5/weather?q={City}&APPID={apiKey}&units=metric"
+    apiKey = os.getenv("OPENWEATHERAPI")
+    url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&APPID={apiKey}&units=metric"
     weather = requests.get(url, headers={"Accept": "application/json"})
-    print(weather)
     if weather.status_code == 404:
-        return "Invalid City"
+        return "invalid_city"
+    elif weather.status_code == 401:
+        return "invalid_api"
     else:
         wdata = weather.json()
         return wdata
