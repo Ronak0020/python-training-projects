@@ -3,23 +3,27 @@
 
 ## Contents of this Repository:
 ### Assignments
-- Add all "n" numbers provided by user
-- Find factorial of a number using while loop
-- Find squares of a number from a list and put it in another list
-- Reverse the words of a string
-- Attendance system
+1. Add all "n" numbers provided by user
+2. Find factorial of a number using while loop
+3. Find squares of a number from a list and put it in another list
+4. Reverse the words of a string
+5. Attendance system
  * Includes registration of student
  * Marking attendance
  * Checking attendance
-- Login system (OTP for forgot password)
+6. Login system (OTP for forgot password)
  * Register
  * Login
  * If forgot password, generate an OTP to reset password
-- ATM System
+7. ATM System
  * Deposit
  * Withdraw
  * Check balance
  * [Use of class]
+8. Book Entry System
+ * Multiple Book entry
+ * Get book info using id
+ * Use of class
 
 ### Project
 - Weather GUI using OpenWeatherMap.org api
